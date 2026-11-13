@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +13,8 @@
 
 body {
   margin: 0;
-  width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: #080d1c;
   color: white;
   font-family: Arial, sans-serif;
@@ -29,30 +25,33 @@ body {
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 30px 20px;
+  padding: 25px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #151f38;
+  align-items: center;
+  background: linear-gradient(135deg, #101a35, #202b50);
   border: 2px solid #00eaff;
   box-shadow: 0 0 25px #00eaff55;
 }
 
 h1 {
   color: #00eaff;
-  font-size: 30px;
+  font-size: 32px;
+  text-shadow: 0 0 15px #00eaff;
 }
 
 p {
-  font-size: 17px;
+  font-size: 18px;
 }
 
 select, button {
   width: 100%;
-  padding: 15px;
+  max-width: 350px;
+  padding: 16px;
   margin: 10px 0;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 18px;
   font-weight: bold;
 }
@@ -68,24 +67,32 @@ button {
   cursor: pointer;
 }
 
+button:active {
+  transform: scale(0.97);
+}
+
 button:disabled {
   opacity: 0.5;
 }
 
 #clickBtn {
   background: #ffcc00;
+  font-size: 23px;
 }
 
 .stats {
   display: flex;
   justify-content: space-around;
-  margin: 25px 0;
+  width: 100%;
+  max-width: 350px;
+  margin: 20px 0;
   font-size: 25px;
 }
 
 #message {
   color: #00eaff;
   min-height: 30px;
+  font-weight: bold;
 }
 
 </style>
@@ -96,6 +103,7 @@ button:disabled {
 <div class="game">
 
 <h1>🎮 X GAMING ZONE</h1>
+
 <p>Test your clicking speed!</p>
 
 <select id="duration">
@@ -104,15 +112,15 @@ button:disabled {
   <option value="15">15 Seconds</option>
 </select>
 
-<button onclick="startGame()">START GAME</button>
+<button onclick="startGame()">🚀 START GAME</button>
 
 <button id="clickBtn" onclick="clickMe()" disabled>
-CLICK ME!
+  CLICK ME!
 </button>
 
 <div class="stats">
-  <div>⏱️ <span id="time">10</span></div>
-  <div>🏆 <span id="score">0</span></div>
+  <div>⏱️ TIME<br><span id="time">10</span></div>
+  <div>🏆 SCORE<br><span id="score">0</span></div>
 </div>
 
 <p id="message">Choose your time and start!</p>
@@ -136,7 +144,7 @@ function startGame() {
 
   document.getElementById("score").textContent = score;
   document.getElementById("time").textContent = timeLeft;
-  document.getElementById("message").textContent = "GO! GO! GO!";
+  document.getElementById("message").textContent = "🔥 GO! GO! GO!";
   document.getElementById("clickBtn").disabled = false;
 
   timer = setInterval(function() {
@@ -148,7 +156,7 @@ function startGame() {
       playing = false;
       document.getElementById("clickBtn").disabled = true;
       document.getElementById("message").textContent =
-        "🎉 Game Over! Your score: " + score;
+        "🎉 GAME OVER! Your score: " + score;
     }
   }, 1000);
 }
@@ -162,7 +170,9 @@ function clickMe() {
 
 function toggleFullscreen() {
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    }
   } else {
     document.exitFullscreen();
   }
@@ -171,3 +181,4 @@ function toggleFullscreen() {
 
 </body>
 </html>
+
