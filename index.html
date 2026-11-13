@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X Gaming Zone</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #080d1c;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.game {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #151f38;
+  border: 2px solid #00eaff;
+  box-shadow: 0 0 25px #00eaff55;
+}
+
+h1 {
+  color: #00eaff;
+  font-size: 30px;
+}
+
+p {
+  font-size: 17px;
+}
+
+select, button {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+select {
+  background: white;
+  color: #111;
+}
+
+button {
+  background: #00eaff;
+  color: #07111f;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+#clickBtn {
+  background: #ffcc00;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 25px 0;
+  font-size: 25px;
+}
+
+#message {
+  color: #00eaff;
+  min-height: 30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+<h1>🎮 X GAMING ZONE</h1>
+<p>Test your clicking speed!</p>
+
+<select id="duration">
+  <option value="5">5 Seconds</option>
+  <option value="10" selected>10 Seconds</option>
+  <option value="15">15 Seconds</option>
+</select>
+
+<button onclick="startGame()">START GAME</button>
+
+<button id="clickBtn" onclick="clickMe()" disabled>
+CLICK ME!
+</button>
+
+<div class="stats">
+  <div>⏱️ <span id="time">10</span></div>
+  <div>🏆 <span id="score">0</span></div>
+</div>
+
+<p id="message">Choose your time and start!</p>
+
+<button onclick="toggleFullscreen()">⛶ FULLSCREEN</button>
+
+</div>
+
+<script>
+let score = 0;
+let timeLeft = 10;
+let timer;
+let playing = false;
+
+function startGame() {
+  clearInterval(timer);
+
+  score = 0;
+  timeLeft = Number(document.getElementById("duration").value);
+  playing = true;
+
+  document.getElementById("score").textContent = score;
+  document.getElementById("time").textContent = timeLeft;
+  document.getElementById("message").textContent = "GO! GO! GO!";
+  document.getElementById("clickBtn").disabled = false;
+
+  timer = setInterval(function() {
+    timeLeft--;
+    document.getElementById("time").textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      playing = false;
+      document.getElementById("clickBtn").disabled = true;
+      document.getElementById("message").textContent =
+        "🎉 Game Over! Your score: " + score;
+    }
+  }, 1000);
+}
+
+function clickMe() {
+  if (!playing) return;
+
+  score++;
+  document.getElementById("score").textContent = score;
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+</script>
+
+</body>
+</html>
